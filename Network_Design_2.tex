@@ -1,0 +1,60 @@
+\subsection{Network E}
+ 
+\begin{figure}[H]
+\begin{tikzpicture}[auto, thick, node distance=1.25cm, >=triangle 45,scale=.15]
+\tiny
+\draw
+%node at (0,0)[right=-3mm](Start){\small Start}
+%node at (40,0)[right=-3mm]{\small B}
+%----------------(A) Inner--------------------------
+node [block] (N1) {N1}
+node [block, right of=N1] (N2) {N2}
+node [block, below of=N2] (N3) {N3}
+node [block, below of=N3] (N4) {N4}
+node [block, left of=N4] (N5) {N5}
+node [block, left of=N5] (N6) {N6}
+node [block, above of=N6] (N7) {N7}
+node [block, above of=N7] (N8) {N8}
+%---------------(B) Outer---------------------------
+node [block, above of=N1] (N11) {N11}
+node [block, right of=N3] (N21) {N21}
+node [block, below of=N5] (N31) {N31}
+node [block, left of=N7] (N41) {N41}
+
+%---------------(C) Block------------------------------
+node [above of=N11] (N111) {N111}
+node [above of=N111] (N112) {N112}
+node [above of=N112] (N113) {N113}
+node [right of=N111] (N1111) at (6,17)  {N1111}
+node [right of=N112] (N1121) at (18,25)  {N1121}
+node [right of=N113] (N1131) at (8,33)  {N1131}
+%----------------Legend--------------------------
+node [] at (15,-25) (L1) {L1}
+node [right of=L1, node distance=3.25cm]  (L2) {L2}
+node [below of=L2] (L3) {L3}
+node [left of=L3,node distance=3.25cm] (L4) {L4}
+
+node[block](K1) at (20,-28) {Test};
+
+%----------------(A1)-----------------------------
+\draw[->,dashed] (N1) -- (N2);
+\draw[->,dashed] (N2) -- (N3);
+\draw[->,dashed] (N3) -- (N4);
+\draw[->,dashed] (N4) -- (N5);
+\draw[->,dashed] (N5) -- (N6);
+\draw[->,dashed] (N6) -- (N7);
+\draw[->,dashed] (N7) -- (N8);
+\draw[->,dashed] (N8) -- (N1);
+
+%----------------(B1)-----------------------------
+\draw[->,dashed] (N1) -- (N111);
+\draw[->,dashed] (N111) -- (N112);
+\draw[->,dashed] (N112) -- (N113);
+%----------------(C1)-----------------------------
+\draw[->] (N111) -- (N1111);
+\draw[->] (N112) -- (N1121);
+\draw[->] (N113) -- (N1131);
+
+\end{tikzpicture}
+\caption{Design of a Box Cycle E}
+\end{figure}
