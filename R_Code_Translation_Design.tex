@@ -1,0 +1,201 @@
+
+
+\section{Library}
+
+\inlinecode{R}{library(tuneR)}
+\inlinecode{R}{library(car)}
+\inlinecode{R}{library(xtable)}
+\inlinecode{R}{library(PerformanceAnalytics)}
+
+\section{Introduction}
+
+\begin{table}
+\caption{The Pearson Distribution System \cite{key103}}
+\begin{tabular}{r|p{4cm}|l}
+ID & Pearson Type & Comment \\
+\hline
+ 1 & Pearson Type 0 (Normal) Distribution & \\
+ 2 & Pearson Type I (Beta) Distribution & \\
+ 3 & Pearson Type II (Symmetric Beta) Distribution & \\
+ 4 & Pearson Type III (Gamma) Distribution & \\
+ 5 & Pearson Type IV Distribution & \\
+ 6 & Pearson Type V (Inverse Gamma) Distribution & \\
+ 7 & Pearson Type VI (Beta Prime) Distribution & \\
+ 8 & Pearson Type VII (Student's t) Distribution & \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Data}
+
+\inlinecode{R}{times <- seq(0, 48, by = 48/120)}
+
+
+\inlinecode{R}{noise.white<-noise(kind = c("white"),duration=length(times))}
+\inlinecode{R}{noise.pink<-noise(kind = c("pink"),duration=length(times))}
+\inlinecode{R}{noise.5.4<-noise(kind = c("power"), alpha=(5/4),duration=length(times))}
+\inlinecode{R}{noise.7.4<-noise(kind=c("power"),alpha=(7/4),duration=length(times))}
+\inlinecode{R}{noise.red<-noise(kind = c("red"),duration=length(times))}
+\inlinecode{R}{noise.8.4<-noise(kind=c("power"),alpha=(8/4),duration=length(times))}
+	
+\inlinecode{R}{noise<-cbind(noise.white@left,
+	noise.pink@left,
+	noise.5.4@left,
+	noise.7.4@left,
+	noise.8.4@left)}
+
+\inlinecode{R}{noise.calendar<-zooreg(noise, frequency = 1, start = as.Date("2000-01-01"))}
+	
+	
+\section{Tables}
+
+\inlinecode{R}{Table.1.df<-data.frame()}
+\inlinecode{R}{distribution.moments.0.df<-data.frame()}
+\inlinecode{R}{distribution.moments.0.df<-rbind(c(noise.names[1],identify.PDF(noise.white@left),min(noise.white@left),max(noise.white@left),empMoments.mutation(noise.white@left)),
+	c(noise.names[2],identify.PDF(noise.pink@left),min(noise.pink@left),max(noise.pink@left),empMoments.mutation(noise.pink@left)),
+	c(noise.names[3],identify.PDF(noise.5.4@left),min(noise.5.4@left),max(noise.5.4@left),empMoments.mutation(noise.5.4@left)),
+	c(noise.names[4],identify.PDF(noise.7.4@left),min(noise.7.4@left),max(noise.7.4@left),empMoments.mutation(noise.7.4@left)),
+	c(noise.names[5],identify.PDF(noise.red@left),min(noise.red@left),max(noise.red@left),empMoments.mutation(noise.red@left)),
+	c(noise.names[6],identify.PDF(noise.8.4@left),min(noise.8.4@left),max(noise.8.4@left),empMoments.mutation(noise.8.4@left))
+	)}
+\inlinecode{R}{colnames(distribution.moments.0.df)<-c("Variable","Pearson","MIN","MAX","Moment 1", "Moment 2","Moment 3","Moment 4","Moment 5","Moment 6","theta")
+}
+\inlinecode{R}{Table.1.0<-xtable(distribution.moments.0.df)}
+
+\section{Figures}
+
+\inlinecode{R}{Figure.1<-plot(noise.white@left, 
+	lwd = 2, 
+	main = "Noise", 
+	ylab = "y", 
+	mfrow = c(2, 2), which = 1) 
+	lines(noise.pink@left, type = "l", lwd = 2, xlab = "y",lty=2,col="red")
+	lines(noise.5.4@left, type = "l", lwd = 2, xlab = "y",lty=3,col="green")
+	lines(noise.7.4@left, type = "l", lwd = 2, xlab = "y",lty=3,col="orange")
+	lines(noise.red@left, type = "l", lwd = 2, xlab = "y",lty=3,col="blue")
+	lines(noise.8.4@left, type = "l", lwd = 2, xlab = "y",lty=4,col="purple")
+	grid()
+	legend("bottomright", col = c("Black", "Red", "Green","Orange","Blue","Purple"), 
+	lty = 1:4, cex=0.75,
+	legend = c("White","Pink", "Pink 2", "Pink 3","Red","Red 2"))}
+
+\inlinecode{R}{Figure.2<-charts.RollingPerformance(noise.calendar)}
+\inlinecode{R}{Figure.3<-charts.PerformanceSummary(noise.calendar[,1])}
+\inlinecode{R}{Figure.4<-chart.RollingCorrelation(noise.calendar[, 1:4], 
+noise.calendar[, 1], 
+colorset=rich8equal, legend.loc="bottomright", 
+width=24, main = "Rolling 12-Month Correlation")}
+
+\section{Function Library}
+
+\inlinecode{R}{identify.PDF<-function(x)
+	{
+		ML.fit<-pearsonFitML(x) 
+		c(Pearson.PDF=ML.fit$type)
+}}
+
+\inlinecode{R}{empMoments.mutation<-function (x) 
+	{
+		n <- length(x)
+		//
+		// A: Moment Models
+		//
+			moment.1 <- mean(x)
+			moment.2  <- var(x) * (n - 1)/n
+		if (moment.2 > 0) 
+			moment.3 <- sum((x - moment.1)^3/sqrt(moment.2)^3)/n
+		else moment.3 <- 0
+		if (moment.2 > 0) 
+			moment.4 <- sum((x - moment.1)^4/moment.2^2)/n
+		else moment.4 <- 0
+		if(moment.4>0)
+			moment.5 <- sum((x - moment.1)^5/moment.2^2)/n
+		else moment.5<-0
+		if(moment.4>0)
+			moment.6 <- sum((x - moment.1)^6/moment.2^2)/n
+		else moment.6<-0
+		//
+		// B: Design Ratios
+		//
+		if(moment.4> 0)
+			theta.1<-moment.3/moment.4 
+		else theta.1<-0
+		//
+		// C: Choose View and Format Return Data
+		//
+		c(average = format(moment.1,digits=2), 
+		variance = format(moment.2,digits=2), 
+		skewness = format(moment.3,digits=2), 
+		kurtosis = format(moment.4,digits=2), 
+		kurtosis.variance.1=format(moment.5,digits=2),
+		kurtosis.variance.2=format(moment.6,digits=2),
+		theta=format(theta.1,digits=2))
+	}}
+	
+	
+
+
+\inlinecode{R}{noise.prototype<-function (kind = c("white", "pink", "power", "red"), 
+	duration = samp.rate, 
+	samp.rate = 44100, 
+	bit = 1, 
+	stereo = FALSE, 
+	xunit = c("samples", "time"), 
+	alpha = 1, ...) 
+	{
+		xunit <- match.arg(xunit)
+		kind <- match.arg(kind)
+		if (kind != "power" && !missing(alpha)) 
+		warning("alpha ignored if noise kind is not 'power'")
+		//
+		//  A: Preprocessing
+		//
+		durFrom <- preWaveform(freq = 1, 
+		duration = duration, 
+		from = 0, 
+		xunit = xunit, 
+		samp.rate = samp.rate) //1st function
+		N <- durFrom["duration"] * (stereo + 1)
+		//
+		// B: Design of channel
+		//
+		channel <- switch(kind, 
+		white = rnorm(N), 
+		pink = TK95(N, alpha = 1), 
+		power = TK95(N, alpha = alpha), 
+		red = TK95(N, alpha = 1.5))
+		channel <- matrix(channel, 
+		ncol = (stereo + 1)) // choose Function
+		//
+		// C: Post Processing
+		//
+		postWaveform(channel = channel, 
+		samp.rate = samp.rate, 
+		bit = bit, 
+		stereo = stereo, ...) // 3rd Function
+	}} \cite{key100}
+
+
+\section{References}
+
+\subsection{Music}
+
+\bibitem[1]{key100}Uwe Ligges, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg (2016). 
+\newblock tuneR:Analysis of music. 
+\newblock URL: http://r-forge.r-project.org/projects/tuner/.
+
+\bibitem[1]{key101}John Fox and Sanford Weisberg (2011). 
+\newblock An {R} Companion to Applied Regression, 
+\newblock Second Edition. Thousand Oaks CA: Sage. URL:http://socserv.socsci.mcmaster.ca/jfox/Books/Companion
+
+\bibitem[1]{key102}David B. Dahl (2016). 
+\newblock xtable: Export Tables to LaTeX or HTML. 
+\newblock R package version 1.8-2. https://CRAN.R-project.org/package=xtable
+
+\bibitem[1]{key103}Martin Becker and Stefan Klößner (2017). 
+\newblock PearsonDS: Pearson Distribution System. 
+\newblock R package version 1.1. https://CRAN.R-project.org/package=PearsonDS
+
+\bibitem[1]{key104}Brian G. Peterson and Peter Carl (2018). PerformanceAnalytics: Econometric Tools for
+\newblock Performance and Risk Analysis. R package version 1.5.2.
+\newblock https://CRAN.R-project.org/package=PerformanceAnalytics
