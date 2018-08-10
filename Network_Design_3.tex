@@ -1,0 +1,73 @@
+
+
+
+\begin{figure}[H]
+	\begin{tikzpicture}[auto, thick, node distance=1.25cm, >=triangle 45,scale=.15]
+	\tiny
+	\draw
+	%------------------Drawing of Network A
+	#-------------------Group 1
+	node at (0,0)[right=-3mm]{\small Start}
+	node [input, name=input1] {} 
+	node [block, right of=input1] (A) {A}
+	node [block, right of=A] (B) {B}
+	node at (0,0) [block] (C) {C}
+	node [block, right of=C] (D) {D}
+	node [block, right of=D] (E) {E}
+	node [block, right of=E] (F) {F}
+	#-------------------Group 2
+	node [block, right of=F] (G) {G}
+	node [block, right of=G] (H) {H}
+	node at (0,0) [block] (I) {I}
+	node [block, right of=I] (J) {J}
+	node [block, right of=J] (K) {K}
+	node [block, right of=K] (L) {L}
+	#-------------------Group 3
+	node [block, right of=L] (M) {M}
+	node [block, right of=M] (N) {N}
+	node at (0,0) [block] (O) {O}
+	node [block, right of=O] (P) {P}
+	node [block, right of=P] (Q) {Q}
+	node [block, right of=Q] (R) {R}
+	#-------------------Group 4
+	node [block, right of=R] (S) {S}
+	node [block, right of=S] (T) {T}
+	node [block, right of=T] (U) {U}
+	node at (0,0) [block] (V) {V}
+	node [block, right of=V] (W) {W}
+	node [block, right of=W] (X) {X}
+	node [block, right of=X] (Y) {Y}
+	node [block, right of=Y] (Z) {Z};
+	#------------------Group 5
+	%---------------EDGES
+	\draw[->] (A)--(B);
+	\draw[->] (B)--(C);
+	\draw[->] (C)--(D);
+	\draw[-|] (D)--(E);
+	\draw[->] (E)--(F);	
+	\draw[->] (F)--(G);
+	\draw[->] (G)--(H);
+	\draw[-|] (H)--(I);
+	\draw[->] (I)--(J);
+	\draw[->] (J)--(K);
+	\draw[->] (K)--(L);
+	\draw[->] (L)--(M);
+	\draw[-|] (M)--(N);
+	\draw[->] (N)--(O);
+	\draw[->] (O)--(P);
+	\draw[->] (P)--(Q);
+	\draw[-|] (Q)--(R);
+	\draw[->] (R)--(S);
+	\draw[->] (S)--(T);
+	\draw[->] (T)--(U);
+	\draw[-|] (U)--(V);
+	\draw[->] (V)--(W);
+	\draw[->] (W)--(X);
+	\draw[->] (X)--(Y);
+	\draw[-|] (Y)--(Z);
+	\draw[->] (Z)--(A);
+	#------------------
+	\node at (1,3) [above=1mm, right=0mm] {\textsc{Network A}};	
+	
+	\end{tikzpicture}
+\end{figure}
