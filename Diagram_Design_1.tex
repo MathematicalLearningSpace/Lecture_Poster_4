@@ -1,7 +1,11 @@
+#----------------------------------------Example of Diagram for Lectures and Posters------------------------------
 \documentclass[border=10pt]{standalone}
 \usepackage[edges]{forest}
 \usepackage{tikz}
 \usepackage{tikz-qtree}
+
+\begin{document}
+%-----------------------------------------Diagram 1----------------------------------------------------------
 \begin{tikzpicture}
 \tikzset{edge from parent/.style={draw,edge from parent path={(\tikzparentnode.south)-- +(0,-8pt)-| (\tikzchildnode)}}}
 \Tree [.A 
@@ -16,4 +20,5 @@
 [.J [.J1 J11 ] [.J2 J12 ] [.J3 J13 ] ]
 ]
 \end{tikzpicture}
+
 \end{document}
