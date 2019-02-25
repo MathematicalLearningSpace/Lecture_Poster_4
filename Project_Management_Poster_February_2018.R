@@ -1,10 +1,5 @@
-library(xtable)
-library(stringr)
-library(stringi)
-library(readr)
-library(readxl)
-library(igraph)
-library(visNetwork)
+#-------------------------------To Be Updated with Examples in the Classroom----------------------------------------------------------
+library(xtable);library(stringr);library(stringi);library(readr);library(readxl);library(igraph);library(visNetwork)
 #--------------------------------Data------------------------------------------------------------------------------------------------------
 poster.blocks.categories<-c("PosterBlockID",
   "PosterID",
@@ -41,15 +36,34 @@ poster.blocks.df<-rbind(c(94,1,"Vision Statement",1, "2018\\Poster\\Template\\vi
       c(99,1, "Volunteer_Experience",1, "2018\\Poster\\Template\\Volunteer_Experience.tex","","",10,"","","")
 )
 colnames(poster.blocks.df)<-poster.blocks.categories
+
 write.csv(poster.blocks.df,file="Resume_Poster_February_2018")
+write.csv(poster.blocks.df,file="Resume_Poster_January_2019")
+write.csv(poster.blocks.df,file="Resume_Poster_February_2019")
 
 Resume.Poster.February.2018 <- as.data.frame(read_csv("Resume_Poster_February_2018"))
+Resume.Poster.January.2019 <- as.data.frame(read_csv("Resume_Poster_January_2019"))
+Resume.Poster.February.2019 <- as.data.frame(read_csv("Resume_Poster_February_2019"))
+
 View(Resume.Poster.February.2018)
 
 #-----------------------------Tables-----------------------------------------------------------------------------------------------------
-
+Table.1<-NULL
 #-----------------------------Figures----------------------------------------------------------------------------------------------------
-
+Figure.1<-NULL
 #-----------------------------References-------------------------------------------------------------------------------------------------
+references<-stringr::str_c("","","")
 
 #-----------------------------Function Library-------------------------------------------------------------------------------------------
+
+f.1<-function(X)
+{
+
+  output<-list()
+  output$X<-X
+  return(output)
+}
+
+test.f.1<-f.1(LETTERS)
+test.f.1
+
