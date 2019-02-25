@@ -1,18 +1,16 @@
-library(xtable)
-library(stringr)
-library(stringi)
-library(readr)
-library(readxl)
-
+#---------------------------------------Project Managment Examples for the Classroom----------------------
+library(xtable);library(stringr);library(stringi);library(readr);library(readxl)
 #--------------------------------Data------------------------------------------------------------------------------------------------------
 
-
+#-------------------2018----------------------
 Project.Management.End.of.Month.January.2018.Data.df <- as.data.frame(read_csv("January/Project_Management_End_of_Month_January_2018_Data.txt"))
+
 View(Project.Management.End.of.Month.January.2018.Data.df)
-
-
 Project.Names.List<-Project.Management.End.of.Month.January.2018.Data.df$ProjectName
 Project.Names.List.N<-length(Project.Names.List)
+
+#------------------2019-----------------------
+
 
 #-------------------------------Analysis---------------------------------------------------------------------------------------------------
 
