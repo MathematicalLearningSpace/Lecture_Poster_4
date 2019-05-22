@@ -11,6 +11,7 @@
 
 \section{Introduction}
 
+#---------Example of Probability Distributions from the Solution of the Pearson Differential Equation----------
 \begin{table}
 \caption{The Pearson Distribution System \cite{key103}}
 \begin{tabular}{r|p{4cm}|l}
@@ -29,7 +30,8 @@ ID & Pearson Type & Comment \\
 \end{table}
 
 \section{Data}
-
+%-----------------------------------------Different Noise Specifications-------------------------------------%
+%------------------------------------------------------------------------------------------------------------%
 \inlinecode{R}{times <- seq(0, 48, by = 48/120)}
 
 \inlinecode{R}{noise.white<-noise(kind = c("white"),duration=length(times))}
@@ -46,6 +48,8 @@ ID & Pearson Type & Comment \\
 	noise.8.4@left)}
 
 \inlinecode{R}{noise.calendar<-zooreg(noise, frequency = 1, start = as.Date("2000-01-01"))}
+
+%--------------------------------------------Tables---------------------------------------------------
 
 \section{Tables}
 
