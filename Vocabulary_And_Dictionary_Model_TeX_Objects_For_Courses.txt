@@ -1,0 +1,33 @@
+
+%------------------------------------------------------------------------------------%
+%--------------Vocabulary and Dictionary Model For Courses---------------------------%
+%----------------------Work in Progress----------------------------------------------%
+
+\begin{table}[H]\tiny
+\caption{Dictonary for Lectures}
+\begin{tabular}{r|>{\tiny}p{1cm}|llll}
+\hline	
+ID & TeX Object & Lecture & Comment & \\
+\hline 
+A & DD_1  & & & \\
+\hline
+A & ES_1  & & & \\
+\hline
+A & JA_1  & & & \\
+B & JA_2  & & & \\
+\hline
+A & ND_1  & & & \\
+B & ND_2  & & & \\
+C & ND_3  & & & \\
+\hline
+A & TD_1 & & & \\
+B & TD_2 & & & \\
+C & TD_3 & & & \\
+D & TD_4 & & & \\
+E & TD_5 & & & \\
+F & TD_6 & & & \\
+G & TD_7 & & & \\
+H & TD_8 & & & \\
+I & TD_9 & & & \\
+\end{tabular}
+\end{table}
