@@ -17,8 +17,13 @@
 \begin{scope}[opacity = 1,fill opacity = 0.25,text opacity = 0.75,text width = 6em,text centered]
 \begin{scope}[opacity = 1,fill opacity = 0.25,text opacity = 0.75,text width = 6em,text centered]
 %
+\def\firstcircle{(45:6cm) circle (1cm)}
+\draw [fill = color1] \firstcircle node [rblock, above = 12em] {\href{www.mathlearningspace.com}{Music Motifs}};
 \end{scope}
 \begin{scope
 %
+\node[block] (A) at (360:5) {\href{www.mathlearningspace.com}{\tiny{Composition 1}}};
+%
+\node[rblock] (M1) at (90:9){\href{www.mathlearningspace.com}{\tiny{Motif A}}};
 \end{scope}
 \end{tikzpicture}
